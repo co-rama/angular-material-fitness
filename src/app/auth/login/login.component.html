@@ -1,1 +1,33 @@
-<p>login works!</p>
+<section class="login-form" fxLayout fxLayoutAlign="center">
+  <form fxLayout="column" fxLayoutAlign="center center" flexLayoutGap="10px"
+        #logForm="ngForm"
+        (ngSubmit)="submit(logForm)" >
+    <h5 class="title">LOGIN TO {{ title }}</h5>
+    <mat-form-field appearance="outline">
+      <mat-label>Your Username [email]</mat-label>
+      <input type="email" matInput placeholder="email"
+             ngModel name="email"
+             required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Your Password</mat-label>
+      <input [type]="hide ? 'password' : 'text'"
+             matInput placeholder="Password"
+             ngModel name="password"
+             required>
+      <button class="mat-icon-button" matSuffix (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="accent">Login</button>
+    <button type="button" mat-raised-button color="accent">
+      <a routerLink="/signup">
+        Register with {{title.toLocaleLowerCase()}}</a>
+    </button>
+    <div class="quick-link fitness-padding">
+      <a class="log-links fitness-padding" routerLinkActive="active" routerLink="/">Go to Fitness</a>
+      <a class="log-links fitness-padding" routerLinkActive="active" routerLink="/signup">ForgotPassword</a>
+    </div>
+  </form>
+</section>
