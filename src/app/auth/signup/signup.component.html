@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="col-lg-12 signup" fxLayout="column" fxLayoutAlign="start center">
+    <form fxLayout="column"  #f="ngForm" (ngSubmit)="signUp(f)">
+      <mat-form-field appearance="outline">
+        <input matInput required placeholder="Your email" ngModel name="email" email>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput type="password" required placeholder="Your password" ngModel name="password">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="picker" placeholder="Choose your birthday"
+               [max]="maxDate"
+               required ngModel name="birthdate">
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox ngModel name="terms" required>
+        Agree to Terms and Conditions
+      </mat-checkbox>
+      <button mat-raised-button type="submit" color="accent" [disabled]="f.invalid">Sign Up</button>
+    </form>
+  </div>
+</div>
