@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "corama-corporation": {
+      "hosting": {
+        "fitness": [
+          "corama-corporation"
+        ]
+      }
+    }
+  }
+}
