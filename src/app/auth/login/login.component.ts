@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
       email: form.value.email,
       password: form.value.password
     });
-    if (form.valid){
-     this.router.navigate(['../training']);
-   }
+    if (this.authService.isAuth()){
+      this.router.navigate(['../training']);
+    }
   }
 }

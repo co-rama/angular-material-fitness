@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,7 @@ import {AuthService} from '../auth.service';
 export class SignupComponent implements OnInit {
   maxDate;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.maxDate = new Date();
@@ -21,5 +22,8 @@ export class SignupComponent implements OnInit {
       email: f.value.email,
       password: f.value.password
     });
+    if (this.authService.isAuth()){
+      this.router.navigate(['../training']);
+    }
   }
 }
