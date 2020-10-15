@@ -8,7 +8,7 @@
          *ngIf="!isAuth"><mat-icon>input</mat-icon>
         <span class="nav-caption">Login</span></a><a mat-list-item routerLink="/login" (click)="sidenav.close()"
          *ngIf="isAuth"><mat-icon>output</mat-icon>
-        <span class="nav-caption">Logout</span></a>
+        <span class="nav-caption" (click)="onLogout()">Logout</span></a>
       <a mat-list-item routerLink="/training" (click)="sidenav.close()"
          *ngIf="isAuth"><mat-icon>fitness_center</mat-icon>
         <span class="nav-caption">Training</span></a>
@@ -25,7 +25,7 @@
           <li><a routerLink="/signup" *ngIf="!isAuth">Sign Up</a></li>
           <li><a routerLink="/login" *ngIf="!isAuth">Login</a></li>
           <li><a routerLink="/training" *ngIf="isAuth">Training</a></li>
-          <li><a routerLink="/training" *ngIf="isAuth">Logout</a></li>
+          <li><a routerLink="/training" *ngIf="isAuth" (click)="onLogout()">Logout</a></li>
         </ul>
       </div>
     </mat-toolbar>

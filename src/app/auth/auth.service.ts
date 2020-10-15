@@ -2,6 +2,7 @@ import {UserModel} from './user.model';
 import {AuthDataModel} from './auth-data.model';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
   }
@@ -9,7 +10,7 @@ import {Subject} from 'rxjs';
 export class AuthService{
   private user: UserModel;
   authChange = new Subject<boolean>();
-  constructor() {
+  constructor(private router: Router) {
   }
   registerUser(authData: AuthDataModel): void{
     this.user = {
@@ -28,6 +29,7 @@ export class AuthService{
   logout(): void{
     this.user = null;
     this.authChange.next(false);
+    this.router.navigate(['/login']);
   }
   getUser(): UserModel{
     return {...this.user};
