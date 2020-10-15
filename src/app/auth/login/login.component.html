@@ -3,13 +3,13 @@
         #logForm="ngForm"
         (ngSubmit)="submit(logForm)" >
     <h5 class="title">LOGIN TO {{ title }}</h5>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Your Username [email]</mat-label>
       <input type="email" matInput placeholder="email"
              ngModel name="email"
              required>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" color="accent">
       <mat-label>Your Password</mat-label>
       <input [type]="hide ? 'password' : 'text'"
              matInput placeholder="Password"
