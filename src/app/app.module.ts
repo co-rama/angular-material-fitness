@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FitnessRoutingModule } from './fitness-routing/fitness-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import {StopCurrentTraining} from './training/current-training/stop-current-trai
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     MaterialModule,
     FitnessRoutingModule,
