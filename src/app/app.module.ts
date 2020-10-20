@@ -18,6 +18,7 @@ import { PastTrainingComponent } from './training/past-training/past-training.co
 import {FormsModule} from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {StopCurrentTraining} from './training/current-training/stop-current-training';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {StopCurrentTraining} from './training/current-training/stop-current-trai
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     BrowserAnimationsModule,
     MaterialModule,
     FitnessRoutingModule,

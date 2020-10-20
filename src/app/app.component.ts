@@ -13,11 +13,12 @@ export class AppComponent implements OnInit, OnDestroy{
   constructor(private authService: AuthService) {
   }
   ngOnInit(): void{
-   this.authSubscription = this.authService.authChange.subscribe(
-     authStatus => {
-       this.isAuth = authStatus;
-     }
-   );
+    this.authService.authListener();
+    this.authSubscription = this.authService.authChange.subscribe(
+       authStatus => {
+         this.isAuth = authStatus;
+       }
+     );
   }
   onLogout(): void{
     this.authService.logout();
