@@ -10,9 +10,9 @@ import {map} from 'rxjs/operators';
 export class TrainingService{
   private availableExercises: Exercise[] = [];
   private runningExercise: Exercise;
-  private exercises: Exercise[] = [];
   exerciseChanged = new Subject<Exercise>();
   exercisesChanged = new Subject<Exercise[]>();
+  finishedExerciseChanged = new Subject<Exercise[]>();
   constructor(private firebase: AngularFirestore) {
   }
   fetAvailableExercises(): void{
@@ -32,10 +32,20 @@ export class TrainingService{
         }
       );
   }
+  fetchCompletedFinishedExercises(): void
+  {
+   this.firebase.collection('finishedExercises').valueChanges()
+     .subscribe(
+       (exercises: Exercise[]) => {
+         this.finishedExerciseChanged.next(exercises);
+       }
+    );
+  }
   getAvailableExercises(): Exercise[]{
     return this.availableExercises.slice();
   }
   startExercise(selectedId: string): void{
+    // this.firebase.doc('exercises/' + selectedId).update({latestDate: new Date()});
     this.runningExercise = this.getAvailableExercises().find(
       ex => ex.id === selectedId
     );
@@ -45,21 +55,22 @@ export class TrainingService{
     return this.runningExercise;
   }
   completeExercise(): void{
-    this.exercises.push({...this.runningExercise, date: new Date(), state: 'completed'});
+    this.addDataToDatabase({...this.runningExercise, date: new Date().toDateString(), state: 'completed'});
     this.runningExercise = null;
     this.exerciseChanged.next(null);
   }
   cancelExercise(progress: number): void{
-    this.exercises.push({...this.runningExercise,
+    this.addDataToDatabase({...this.runningExercise,
       duration: this.runningExercise.duration * (progress / 100),
       calories: this.runningExercise.calories * (progress / 100),
-      date: new Date(),
+      date: new Date().toDateString(),
       state: 'cancelled'}
       );
     this.runningExercise = null;
     this.exerciseChanged.next(null);
   }
-  getCompletedOrCancelledExercises(): Exercise[]{
-    return this.exercises.slice();
+  private addDataToDatabase(exercise: Exercise): void
+  {
+    this.firebase.collection('finishedExercises').add(exercise);
   }
 }
