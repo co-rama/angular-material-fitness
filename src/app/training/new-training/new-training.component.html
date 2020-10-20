@@ -3,15 +3,21 @@
     <mat-card fxFlex.xs="100%" fxFlex="350px">
       <mat-card-title>Time to start a new workout!</mat-card-title>
       <mat-card-content>
-        <mat-form-field color="accent">
-          <mat-select placeholder="Choose Exercise" ngModel name="exercise" required>
+        <mat-form-field color="accent" *ngIf="!loadingState">
+          <mat-select placeholder="Choose Exercise"
+                      ngModel name="exercise" required>
             <mat-option *ngFor="let exercise of exercises"
                         [value]="exercise.id">{{ exercise.name }}</mat-option>
           </mat-select>
         </mat-form-field>
+        <div fxLayoutAlign="center">
+          <mat-spinner *ngIf="loadingState" color="accent"></mat-spinner>
+        </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent" [disabled]="f.invalid">Start</button>
+        <button mat-raised-button color="accent"
+                *ngIf="!loadingState"
+                [disabled]="f.invalid">Start</button>
       </mat-card-actions>
     </mat-card>
   </form>

@@ -20,8 +20,9 @@
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="accent">Login</button>
-    <button type="button" mat-raised-button color="accent">
+    <mat-spinner [value]="" color="accent" *ngIf="loadingState"></mat-spinner>
+    <button type="submit" mat-raised-button color="accent" *ngIf="!loadingState">Login</button>
+    <button type="button" mat-raised-button color="accent" *ngIf="!loadingState">
       <a routerLink="/signup">
         Register with {{title.toLocaleLowerCase()}}</a>
     </button>

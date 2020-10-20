@@ -5,6 +5,7 @@ import {TrainingService} from '../training.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {Subscription} from 'rxjs';
+import {UiService} from '../../services/ui.service';
 
 @Component({
   selector: 'app-past-training',
@@ -17,16 +18,21 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private subscriptionItem: Subscription;
+  loadingState = false;
 
-  constructor(private trainingService: TrainingService) { }
+  constructor(private trainingService: TrainingService,
+              private uiService: UiService) { }
 
   ngOnInit(): void {
+    this.uiService.loadingStateChanged.next(true);
     this.subscriptionItem = this.trainingService.finishedExerciseChanged.subscribe(
       (exercises: Exercise[]) => {
+        this.uiService.loadingStateChanged.next(false);
         this.dataSource.data = exercises;
       }
     );
     this.trainingService.fetchCompletedFinishedExercises();
+    this.uiService.loadingStateChanged.subscribe(loadState => this.loadingState = loadState);
   }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

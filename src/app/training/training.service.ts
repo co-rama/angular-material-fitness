@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Subject, Subscription} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
+import {UiService} from '../services/ui.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,11 @@ export class TrainingService{
   exercisesChanged = new Subject<Exercise[]>();
   finishedExerciseChanged = new Subject<Exercise[]>();
   firebaseSub: Subscription[] = [];
-  constructor(private firebase: AngularFirestore) {
+  constructor(private firebase: AngularFirestore,
+              private uiService: UiService) {
   }
   fetAvailableExercises(): void{
+    this.uiService.loadingStateChanged.next(true);
     this.firebaseSub.push(this.firebase.collection('exercises').snapshotChanges()
       .pipe(map(
         resultsArray => {
@@ -30,6 +33,7 @@ export class TrainingService{
         (exercises: Exercise[]) => {
           this.availableExercises = exercises;
           this.exercisesChanged.next([...this.availableExercises]);
+          this.uiService.loadingStateChanged.next(false);
         }
       ));
   }

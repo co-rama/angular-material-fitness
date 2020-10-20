@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {TrainingService} from '../training/training.service';
+import {UiService} from '../services/ui.service';
 @Injectable({
   providedIn: 'root'
   }
@@ -13,28 +14,40 @@ import {TrainingService} from '../training/training.service';
 export class AuthService{
   authChange = new Subject<boolean>();
   isAuthenticated = false;
-  constructor(private router: Router, private firestore: AngularFirestore,
-              private angAuth: AngularFireAuth, private trainingService: TrainingService) {
+  constructor(private router: Router,
+              private firestore: AngularFirestore,
+              private angAuth: AngularFireAuth,
+              private trainingService: TrainingService,
+              private uiService: UiService) {
   }
   registerUser(authData: AuthDataModel): void{
+    this.uiService.loadingStateChanged.next(true);
     this.angAuth.createUserWithEmailAndPassword(authData.email, authData.password).
       then(
         results => {
+          this.uiService.loadingStateChanged.next(false);
         }
     ).catch(error => {
-      console.log(error.message);
+      this.uiService.loadingStateChanged.next(false);
+      this.uiService.showSnackbar(error.message);
     });
   }
   login(authData: AuthDataModel): void{
+    this.uiService.loadingStateChanged.next(true);
     this.angAuth.signInWithEmailAndPassword(
       authData.email,
       authData.password,
     ).then(results => {
+      this.uiService.loadingStateChanged.next(false);
     })
-      .catch(error => console.log(error.message));
+      .catch(error => {
+        this.uiService.loadingStateChanged.next(false);
+        this.uiService.showSnackbar(error.message);
+      });
   }
   logout(): void{
-    this.angAuth.signOut().then(results => console.log('success')).catch(error => console.log(error.message));
+    this.uiService.loadingStateChanged.next(false);
+    this.angAuth.signOut().then(results => {}).catch(error => this.uiService.showSnackbar(error.message));
   }
   isAuth(): boolean{
     return this.isAuthenticated;
