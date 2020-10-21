@@ -1,0 +1,10 @@
+.welcome{
+  margin-top: 10px;
+  padding: 0;
+}
+
+@media (max-width: 760px) {
+  .card{
+    width: 97%;
+  }
+}
