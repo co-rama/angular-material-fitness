@@ -23,6 +23,7 @@ export class TrainingService{
     this.firebaseSub.push(this.firebase.collection('exercises').snapshotChanges()
       .pipe(map(
         resultsArray => {
+          // throw (new Error());
           return resultsArray.map(doc => {
             // @ts-ignore
             return { id: doc.payload.doc.id, ...doc.payload.doc.data()};
@@ -34,6 +35,11 @@ export class TrainingService{
           this.availableExercises = exercises;
           this.exercisesChanged.next([...this.availableExercises]);
           this.uiService.loadingStateChanged.next(false);
+        },
+        error => {
+          this.uiService.loadingStateChanged.next(false);
+          this.exercisesChanged.next(null);
+          this.uiService.showSnackbar('Fetching exercises failed, try again later!');
         }
       ));
   }
