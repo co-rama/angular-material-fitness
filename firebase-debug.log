@@ -1,0 +1,13 @@
+[debug] [2020-10-21T00:56:33.642Z] ----------------------------------------------------------------------
+[debug] [2020-10-21T00:56:33.644Z] Command:       /home/razod/.nvm/versions/node/v14.9.0/bin/node /home/razod/.nvm/versions/node/v14.9.0/bin/firebase deploy
+[debug] [2020-10-21T00:56:33.645Z] CLI Version:   8.10.0
+[debug] [2020-10-21T00:56:33.645Z] Platform:      linux
+[debug] [2020-10-21T00:56:33.645Z] Node Version:  v14.9.0
+[debug] [2020-10-21T00:56:33.645Z] Time:          Wed Oct 21 2020 03:56:33 GMT+0300 (East Africa Time)
+[debug] [2020-10-21T00:56:33.645Z] ----------------------------------------------------------------------
+[debug] [2020-10-21T00:56:33.645Z] 
+[debug] [2020-10-21T00:56:33.653Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-10-21T00:56:33.653Z] > authorizing via signed-in user
+[debug] [2020-10-21T00:56:33.654Z] [iam] checking project corama-corporation for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-10-21T00:56:33.657Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/corama-corporation:testIamPermissions  
+ {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}

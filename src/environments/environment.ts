@@ -12,8 +12,8 @@ export const environment = {
     projectId: 'corama-corporation',
     storageBucket: 'corama-corporation.appspot.com',
     messagingSenderId: '698255492873',
-    appId: '1:698255492873:web:2fd601f15cade30384b5d8',
-    measurementId: 'G-BL10X00K0E'
+    appId: '1:698255492873:web:cda3fde3db7e3d2984b5d8',
+    measurementId: 'G-844PFF214Y'
   }
 };
 
