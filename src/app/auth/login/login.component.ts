@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  title = 'Fitness';
+  title = 'CoFitness';
   hide = true;
   loadingState = false;
   private loadSub: Subscription;

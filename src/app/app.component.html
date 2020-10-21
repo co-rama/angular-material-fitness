@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
-    <mat-nav-list style="padding-bottom: 30px">
+    <mat-nav-list style="margin-top: 30px">
       <a mat-list-item routerLink="/signup" (click)="sidenav.close()"
          *ngIf="!isAuth"><mat-icon>face</mat-icon>
         <span class="nav-caption">Sign Up</span></a>
@@ -20,12 +20,14 @@
       <div fxHide.gt-xs>
         <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
       </div>
-      <div><a routerLink="/">CoFitness</a></div>
+      <div><a routerLink="/">Cofitness</a></div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
         <ul fxLayout fxLayoutGap="10px">
           <li><a routerLink="/signup" *ngIf="!isAuth">Sign Up</a></li>
           <li><a routerLink="/login" *ngIf="!isAuth">Login</a></li>
-          <li><a routerLink="/training" *ngIf="isAuth">Training</a></li>
+          <li><a routerLink="/training" *ngIf="isAuth" mat-list-item>
+            <mat-icon>fitness_center</mat-icon>
+            <span class="nav-caption">Training</span></a></li>
           <li><a *ngIf="isAuth" (click)="onLogout()">Logout</a></li>
         </ul>
       </div>
