@@ -1,14 +1,14 @@
 {
+  "projects": {
+    "default": "corama-corporation"
+  },
   "targets": {
     "corama-corporation": {
       "hosting": {
         "fitness": [
-          "corama-corporation"
+          "project-698255492873"
         ]
       }
     }
-  },
-  "projects": {
-    "default": "corama-corporation"
   }
 }
